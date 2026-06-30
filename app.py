@@ -1,10 +1,6 @@
-%%writefile app.py
-
 import streamlit as st
 from transformers import AutoTokenizer
 
-# Load a pre-trained tokenizer (e.g., BERT's tokenizer)
-# This will be loaded only once when the app starts
 @st.cache_resource
 def get_tokenizer():
     return AutoTokenizer.from_pretrained("bert-base-uncased")
@@ -12,7 +8,6 @@ def get_tokenizer():
 tokenizer = get_tokenizer()
 
 def tokenize_and_get_ids(sentence):
-    """Tokenizes a sentence and returns tokens and their IDs."""
     if not sentence:
         return [], []
     tokens = tokenizer.tokenize(sentence)
@@ -22,7 +17,6 @@ def tokenize_and_get_ids(sentence):
 st.title("Sentence Tokenizer and Token ID Generator")
 st.write("Enter a sentence to see its tokens and their corresponding IDs.")
 
-# Input text area for the sentence
 user_sentence = st.text_area("Enter your sentence here:", "chatgpt is powerful")
 
 if user_sentence:
